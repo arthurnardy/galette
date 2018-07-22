@@ -658,6 +658,20 @@ class Adherent
         return $this->_parent !== null;
     }
 
+
+    /**
+     * Set members parent
+     *
+     * @param integer $id Parent id
+     *
+     * @return Adherent
+     */
+    public function setParent(integer $id)
+    {
+        $this->parent = $id;
+        return $this;
+    }
+
     /**
      * Does member have children?
      *
@@ -1827,5 +1841,42 @@ class Adherent
         $this->_id = null;
         //drop mail, must be unique
         $this->_email = null;
+    }
+
+    /**
+     * Can current ogged in user edit member
+     *
+     * @param Login $login Login instance
+     *
+     * @return boolean
+     */
+    public function canEdit($login)
+    {
+        if ($login->id == $this->id || $login->isAdmin() || $login->isStaff()) {
+            return true;
+        }
+
+        //parent can change their child cards
+        if ($this->hasParent() && $this->parent->id === $login->id) {
+            return true;
+        }
+
+        //check if requested member is part of managed groups
+        if ($login->isGroupManager()) {
+            $groups = $this->groups;
+            foreach ($groups as $g) {
+                if ($login->isGroupManager($g->getId())) {
+                    return true;
+                }
+            }
+        }
+
+        //requested member does not have ACLs. Log and return
+        Analog::log(
+            'Trying to display member #' . $this->id . ' without appropriate ACLs',
+            Analog::WARNING
+        );
+
+        return false;
     }
 }

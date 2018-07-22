@@ -372,6 +372,7 @@
 
                             //remove required attribute on address and mail fields if member has a parent
                             var _parentfields = '';
+        {assign var="parent_fields" value=$member->getParentFields()}
         {if $parent_fields|@count gt 0}
             {foreach item=req from=$parent_fields}
                             _parentfields += '#{$req}';
