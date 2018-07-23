@@ -112,21 +112,35 @@ $app->get(
                     $filters->orderby = $value;
                     break;
                 case 'member':
-                    if (($this->login->isAdmin()
-                        || $this->login->isStaff())
-                    ) {
-                        if ($value == 'all') {
-                            $filters->filtre_cotis_adh = null;
-                        } else {
-                            $filters->filtre_cotis_adh = $value;
+                    if (($this->login->isAdmin() || $this->login->isStaff()) && $value == 'all') {
+                        $filters->filtre_cotis_adh = null;
+                    } else {
+                        if (!$this->login->isAdmin() && !$this->login->isStaff() && $value != $this->login->id) {
+                            $member = new Adherent(
+                                $this->zdb,
+                                (int)$value,
+                                [
+                                    'picture'   => false,
+                                    'groups'    => false,
+                                    'dues'      => false,
+                                    'parent'    => true
+                                ]
+                            );
+                            if (!$member->hasParent() ||
+                                $member->hasParent() && $member->parent->id != $this->login->id
+                            ) {
+                                Analog::log(
+                                    'Trying to display contributions for member #' . $value .
+                                    ' without appropriate ACLs',
+                                    Analog::WARNING
+                                );
+                                $value = $this->login->id;
+                            }
                         }
+                        $filters->filtre_cotis_adh = $value;
                     }
                     break;
             }
-        }
-
-        if (!$this->login->isAdmin() && !$this->login->isStaff()) {
-            $filters->filtre_cotis_adh = $this->login->id;
         }
 
         $class = '\\Galette\\Repository\\' . ucwords($raw_type);
