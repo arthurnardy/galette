@@ -260,7 +260,7 @@ class AdvancedMembersList extends MembersList
             )
         );
 
-   $this->_groups_search_log_op = self::OP_OR;
+        $this->_groups_search_log_op = self::OP_OR;
 
 /** end modification for multiple groups search*/
 
@@ -583,44 +583,43 @@ class AdvancedMembersList extends MembersList
                     }
                     break;
 /** modification for multiple groups search */
-            case 'groups_search':
-                if ( isset($this->_groups_search['empty']) ) {
-                    unset($this->_groups_search['empty']);
-              }
-                if ( is_array($value) ) {
-                    if ( isset($value['group'])
-                       && isset($value['idx'])
-                    ) {
-                        $id = $value['idx'];
-                        unset($value['idx']);
-                        $this->_groups_search[$id] = $value;
+                case 'groups_search':
+                    if (isset($this->_groups_search['empty'])) {
+                        unset($this->_groups_search['empty']);
+                    }
+                    if (is_array($value)) {
+                        if (isset($value['group'])
+                           && isset($value['idx'])
+                        ) {
+                            $id = $value['idx'];
+                            unset($value['idx']);
+                            $this->_groups_search[$id] = $value;
+                        } else {
+                            Analog::log(
+                                '[AdvancedMembersList] bad construct for group filter',
+                                Analog::WARNING
+                            );
+                        }
                     } else {
                         Analog::log(
-                            '[AdvancedMembersList] bad construct for group filter',
+                            '[AdvancedMembersList] Value for group filter should be an '
+                            .'array (' . gettype($value) . ' given',
                             Analog::WARNING
                         );
                     }
-                } else {
-                    Analog::log(
-                        '[AdvancedMembersList] Value for group filter should be an '
-                        .'array (' . gettype($value) . ' given',
-                        Analog::WARNING
-                    );
-                }
-                break;
-       case 'groups_logical_operator':
-       case 'groups_search_log_op': // TBD : change this, shame on me !
-           if ($value == self::OP_AND || $value == self::OP_OR)
-           {
+                    break;
+                case 'groups_logical_operator':
+                case 'groups_search_log_op': // TBD : change this, shame on me !
+                    if ($value == self::OP_AND || $value == self::OP_OR) {
                         $this->_groups_search_log_op = $value;
-           } else {
-             Analog::log(
-                        '[AdvancedMembersList] Value for group filter logical operator should be '
-                        .' in [0,1] (' . gettype($value) . '-> '.$value.' given )',
-                        Analog::WARNING
-                    );
-           }
-                break;
+                    } else {
+                        Analog::log(
+                            '[AdvancedMembersList] Value for group filter logical operator should be '
+                            .' in [0,1] (' . gettype($value) . '-> '.$value.' given )',
+                            Analog::WARNING
+                        );
+                    }
+                    break;
 /** end of modification for multiple groups search */
                 default:
                     if (substr($name, 0, 4) === 'cds_'
