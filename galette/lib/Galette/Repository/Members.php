@@ -1155,42 +1155,62 @@ NOTA : on a la même limitation à un seul niveau d'imbrication que dans la rech
                 if (count($this->filters->groups_search) > 0
                     && !isset($this->filters->groups_search['empty'])
                 ) {
-                    $tmpres= $zdb->db->query('CREATE TEMPORARY TABLE '.PREFIX_DB.'groupsearch (id_adh INT);', Adapter::QUERY_MODE_EXECUTE); // first, build a temporary table which count how many selected groups an adh is member
-                    unset($tmpres);
-                    $grpAnded=0;
+                    $groups_adh = [];
+                    $wheregroups = [];
+
                     foreach ($this->filters->groups_search as $gs) { // then add a row for each ig/searched group pair
-                         $tmpres = $zdb->db->query(
-                             'INSERT INTO '.PREFIX_DB.'groupsearch SELECT ggm.id_adh'
-                             . ' FROM '. PREFIX_DB . Group::GROUPSUSERS_TABLE . ' AS ggm '
-                             . ' LEFT JOIN '. PREFIX_DB . Group::TABLE .' AS gg ON ggm.id_group=gg.id_group'
-                             . ' WHERE gg.id_group = '. $gs['group'] .' OR gg.parent_group = '.$gs['group'] . ' group by ggm.id_adh;',
-                             Adapter::QUERY_MODE_EXECUTE
-                         );
-                         unset($tmpres);
-                         $grpAnded++;
+                        $wheregroups[] = $gs['group'];
                     }
-             // now extract adherent Ids from this temporary table
-                    $tmpselect = $zdb->select('groupsearch');
-                    $tmpselect->columns(array('id_adh'));
-                    $tmpselect->group('id_adh');
-             // if "ORing" groups, we are done. If "ANDing", we have to select only those with max count.*/
-                    if ($this->filters->groups_search_log_op == AdvancedMembersList::OP_AND) {
-                         $tmpselect->having('COUNT(id_adh)='.$grpAnded);
+
+                    $gselect = $zdb->select(Group::GROUPSUSERS_TABLE, 'gu');
+                    $gselect->columns(
+                        array('id_adh', 'id_group')
+                    )->where(
+                        array(
+                            'g.id_group'        => $wheregroups,
+                            'g.parent_group'    => $wheregroups
+                        ),
+                        PredicateSet::OP_OR
+                    );
+                    $gselect->group(['gu.id_adh', 'gu.id_group']);
+
+                    $gselect->join(
+                        array('g' => PREFIX_DB . Group::TABLE),
+                        'gu.id_group=g.' . Group::PK,
+                        array(),
+                        $select::JOIN_LEFT
+                    );
+
+                    $gresults = $zdb->execute($gselect);
+                    $mids = [];
+
+                    switch ($this->filters->groups_search_log_op) {
+                        case AdvancedMembersList::OP_AND:
+                            $ids = [];
+                            foreach ($gresults as $gresult) {
+                                if (!isset($ids[$gresult->id_adh])) {
+                                    $ids[$gresult->id_adh] = 0;
+                                }
+                                $ids[$gresult->id_adh] += 1;
+                                if ($ids[$gresult->id_adh] == count($this->filters->groups_search)) {
+                                    $mids[] = $gresult->id_adh;
+                                }
+                            }
+                            break;
+                        case AdvancedMembersList::OP_OR:
+                            foreach ($gresults as $gresult) {
+                                $mids[] = $gresult->id_adh;
+                            }
+                            break;
                     }
-                    $grpcount=$zdb->execute($tmpselect)->toArray(); // get list of adherent ids
-  // error -> exception changes in Zenddb ?
-             // now we got appropriate id_adhs, inject these in select
-                    $in = 'a.'.Adherent::PK. ' IN (';
-                    $firstAdh=true;
-                    foreach ($grpcount as $ad_id) {
-                        if (!$firstAdh) {
-                            $in.=',';
-                        }
-                        $in.= $ad_id['id_adh'];
-                        $firstAdh=false;
+
+                    if (count($mids)) {
+                        //limit on found members
+                        $select->where->in('a.id_adh', $mids);
+                    } else {
+                        //no match in groups, end of game.
+                        $select->where('false = true');
                     }
-                    $in.=')';
-                    $select->where($in);
                 }
 /** end modification for multiple groups search */
 
