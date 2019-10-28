@@ -1,10 +1,10 @@
-global.$ = require("jquery")
-global.jQuery = require("jquery")
-require('jquery-migrate');
+global.$ = require('jquery')
+global.jQuery = require('jquery')
 require('webpack-jquery-ui');
 require('webpack-jquery-ui/css');
-require('bgfade');
 require('jquery.cookie');
+require('selectize');
+require('selectize-css');
 
 var _initTooltips = function(selector) {
     if (typeof(selector) == 'undefined') {

@@ -34,7 +34,8 @@ module.exports = {
       //"jquery-ui": "jquery-ui/jquery-ui.js",
       // bind to modules;
       modules: path.join(__dirname, "node_modules"),
-      'jquery': path.join(__dirname, '/node_modules/jquery/dist/jquery.min.js')
+      'jquery': path.join(__dirname, '/node_modules/jquery/dist/jquery.min.js'),
+      'selectize-css': path.join(__dirname, '/node_modules/selectize/dist/css/selectize.default.css')
     }
   },
   module: {
