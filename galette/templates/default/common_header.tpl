@@ -14,20 +14,10 @@ Just put a {include file='common_header.tpl'} into the head tag.
         {if file_exists($localstylesheet)}
             <link rel="stylesheet" type="text/css" href="{base_url}/{$template_subdir}/galette_local.css" />
         {/if}
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-{$jquery_version}.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-migrate-{$jquery_migrate_version}.min.js"></script>
+        <script type="text/javascript" src="{base_url}/js/libs/galette-main.bundle.js"></script>
         <script type="text/javascript" src="{base_url}/js/selectize-0.12.6/js/standalone/selectize.min.js"></script>
         <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery.bgFade.js"></script>
-        {* UI accordion is used for main menu ; we have to require it and UI core *}
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.core.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.widget.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.accordion.min.js"></script>
-        {* Buttons can be used everywhere *}
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.button.min.js"></script>
         <script type="text/javascript" src="{base_url}/{$scripts_dir}common.js"></script>
-        {* Tooltips can be used everywhere *}
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.position.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery-ui-{$jquery_ui_version}/jquery.ui.tooltip.min.js"></script>
         {assign var="localjstracking" value="`$_CURRENT_THEME_PATH`tracking.js"}
         {if file_exists($localjstracking)}
             <script type="text/javascript" src="{base_url}/{$template_subdir}/tracking.js"></script>
