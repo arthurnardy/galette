@@ -3,8 +3,8 @@
     <head>
         {include file='common_header.tpl'}
 {if $color_picker}
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}farbtastic.js"></script>
-        <link rel="stylesheet" type="text/css" href="{base_url}/{$template_subdir}farbtastic.css"/>
+        <script type="text/javascript" src="{base_url}/assets/js/farbtastic.js"></script>
+        <link rel="stylesheet" type="text/css" href="{base_url}/assets/css/farbtastic.css"/>
 {/if}
 {if $require_charts}
         <link rel="stylesheet" type="text/css" href="{base_url}/assets/css//galette-jqplot.bundle.min.css" />

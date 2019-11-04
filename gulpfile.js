@@ -42,6 +42,9 @@ var main_assets = [
     }, {
         'src': './galette/webroot/themes/default/jquery-ui/images/*',
         'dest': '/images/'
+    }, {
+        'src': './node_modules/farbstastic/*.png',
+        'dest': '/images/'
     }
 ];
 
@@ -52,7 +55,6 @@ const clean = function(cb) {
 
 function styles() {
   var _dir = galette.public + '/css/';
-
 
   main = gulp.src(main_styles)
     .pipe(replace('jquery-ui/images/', '../images/'))
@@ -67,7 +69,12 @@ function styles() {
     .pipe(cleanCSS())
     .pipe(gulp.dest(_dir));
 
-  return merge(main, jqplot);
+  picker = gulp.src('./node_modules/farbstastic/farbtastic.css')
+    .pipe(replace('url(', 'url(../images/'))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest(_dir))
+
+  return merge(main, jqplot, picker);
 };
 
 function scripts() {
@@ -94,7 +101,11 @@ function scripts() {
     .pipe(uglify())
     .pipe(gulp.dest(_dir));
 
-  return merge(main, jstree, jqplot);
+  picker = gulp.src('./node_modules/farbstastic/farbtastic.js')
+    .pipe(uglify())
+    .pipe(gulp.dest(_dir));
+
+  return merge(main, jstree, jqplot, picker);
 };
 
 function assets() {
