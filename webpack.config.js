@@ -9,7 +9,8 @@ module.exports = {
   mode: 'none',
   output: {
     filename: "galette-[name].bundle.js",
-    path: path.join(__dirname, 'galette', 'webroot', 'js', 'libs')
+    path: path.join(__dirname, 'galette', 'webroot', 'js', 'libs'),
+    publicPath: "js/libs/"
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -27,23 +28,32 @@ module.exports = {
     }
   },
   module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
+    rules: [{
+      test: /\.css$/,
+      loader: 'style-loader!css-loader?sourceMap'
+    }, {
+        test: /\.(woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
             options:{
               name:'[name].[ext]',
-              outputPath:'assets/images/'
+              outputPath:'fonts/'
             }
           },
         ],
-      },
-    ],
+    }, {
+        test: /\.(png|jpe?g|gif|svg)(\?v=\d+\.\d+\.\d+)?$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options:{
+              name:'[name].[ext]',
+              outputPath:'images/'
+            }
+          },
+        ],
+      }
+    ]
   }
 }
