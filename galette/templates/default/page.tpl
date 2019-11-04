@@ -3,8 +3,8 @@
     <head>
         {include file='common_header.tpl'}
 {if $color_picker}
-        <script type="text/javascript" src="{base_url}/assets/js/farbtastic.js"></script>
-        <link rel="stylesheet" type="text/css" href="{base_url}/assets/css/farbtastic.css"/>
+        <script type="text/javascript" src="{base_url}/assets/js/galette-farbtastic.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{base_url}/assets/css/galette-farbtastic.bundle.min.css"/>
 {/if}
 {if $require_charts}
         <link rel="stylesheet" type="text/css" href="{base_url}/assets/css//galette-jqplot.bundle.min.css" />
@@ -38,8 +38,8 @@
     {/if}
 {/if}
 {if $require_tree}
-    {*<script type="text/javascript" src="{base_url}/{$jquery_dir}jquery.jstree.js"></script>*}
-    <script type="text/javascript" src="{base_url}/assets/js/jstree.min.js"></script>
+    <script type="text/javascript" src="{base_url}/assets/js/galette-jstree.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{base_url}/assets/css/galette-jstree.bundle.min.css"/>
 {/if}
 {if $autocomplete}
     <script type="text/javascript">
