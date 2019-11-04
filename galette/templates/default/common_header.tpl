@@ -5,15 +5,13 @@ Just put a {include file='common_header.tpl'} into the head tag.
 *}
 <title>{if $pref_slogan ne ""}{$pref_slogan} - {/if}{if $page_title ne ""}{$page_title} - {/if}Galette {$GALETTE_VERSION}</title>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="{base_url}/assets/galette-main.bundle.min.css" />
+        <link rel="stylesheet" type="text/css" href="{base_url}/assets/css/galette-main.bundle.min.css" />
         {* Let's see if a local CSS exists and include it *}
         {assign var="localstylesheet" value="`$_CURRENT_THEME_PATH`galette_local.css"}
         {if file_exists($localstylesheet)}
             <link rel="stylesheet" type="text/css" href="{base_url}/{$template_subdir}/galette_local.css" />
         {/if}
-        <script type="text/javascript" src="{base_url}/assets/galette-main.bundle.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery.bgFade.js"></script>
-        <script type="text/javascript" src="{base_url}/{$scripts_dir}common.js"></script>
+        <script type="text/javascript" src="{base_url}/assets/js/galette-main.bundle.min.js"></script>
         {assign var="localjstracking" value="`$_CURRENT_THEME_PATH`tracking.js"}
         {if file_exists($localjstracking)}
             <script type="text/javascript" src="{base_url}/{$template_subdir}/tracking.js"></script>

@@ -7,8 +7,8 @@
         <link rel="stylesheet" type="text/css" href="{base_url}/{$template_subdir}farbtastic.css"/>
 {/if}
 {if $require_charts}
-        <link rel="stylesheet" type="text/css" href="{base_url}/assets/galette-jqplot.bundle.min.css" />
-        <script type="text/javascript" src="{base_url}/assets/galette-jqplot.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{base_url}/assets/css//galette-jqplot.bundle.min.css" />
+        <script type="text/javascript" src="{base_url}/assets/js/galette-jqplot.bundle.min.js"></script>
 {/if}
 {if $html_editor}
     {if !isset($plugged_html_editor)}
@@ -38,7 +38,8 @@
     {/if}
 {/if}
 {if $require_tree}
-    <script type="text/javascript" src="{base_url}/{$jquery_dir}jquery.jstree.js"></script>
+    {*<script type="text/javascript" src="{base_url}/{$jquery_dir}jquery.jstree.js"></script>*}
+    <script type="text/javascript" src="{base_url}/assets/js/jstree.min.js"></script>
 {/if}
 {if $autocomplete}
     <script type="text/javascript">

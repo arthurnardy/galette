@@ -76,7 +76,7 @@ tests/mageekguy.atoum.phar
 # Bundled libs
 galette/vendor/
 node_modules/
-galette/webroot/js/libs/*
+galette/webroot/assets/*
 
 # API documentation
 apidocs/
