@@ -7,12 +7,8 @@
         <link rel="stylesheet" type="text/css" href="{base_url}/{$template_subdir}farbtastic.css"/>
 {/if}
 {if $require_charts}
-        <link rel="stylesheet" type="text/css" href="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/jquery.jqplot.css" />
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/jquery.jqplot.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.pieRenderer.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.pointLabels.min.js"></script>
-        <script type="text/javascript" src="{base_url}/{$jquery_dir}jqplot-{$jquery_jqplot_version}/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{base_url}/assets/galette-jqplot.bundle.min.css" />
+        <script type="text/javascript" src="{base_url}/assets/galette-jqplot.bundle.min.js"></script>
 {/if}
 {if $html_editor}
     {if !isset($plugged_html_editor)}
