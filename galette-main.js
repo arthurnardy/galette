@@ -1,5 +1,8 @@
 global.$ = require('jquery')
-global.jQuery = require('jquery')
+global.jQuery = $;
+
+// Font-Awesome
+require('@fortawesome/fontawesome-free/css/all.css');
 require('webpack-jquery-ui');
 require('webpack-jquery-ui/css');
 require('jquery.cookie');
