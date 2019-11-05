@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="{base_url}/{$jquery_dir}markitup-{$jquery_markitup_version}/skins/galette/style.css" />
         <link rel="stylesheet" type="text/css" href="{base_url}/{$jquery_dir}markitup-{$jquery_markitup_version}/sets/html/style.css" />
         <script language="javascript">
-            function toggleMailingEditor(id) {
+            /*function toggleMailingEditor(id) {
                 if(!$('#mailing_html').attr('checked')){
                     $('#mailing_html').attr('checked', true);
                 }
@@ -26,14 +26,29 @@
                 {* While it is not possible to deactivate markItUp, we remove completly the functionnality *}
                 $('#toggle_editor').remove();
                 $('#mailing_corps').markItUp(galetteSettings);
-            }
+            }*/
         {if $html_editor_active eq 1}
-            $(document).ready(function(){
+            /*$(document).ready(function(){
                 {* While it is not possible to deactivate markItUp, we remove completly the functionnality *}
                 $('#toggle_editor').remove();
                 $('#mailing_corps').markItUp(galetteSettings);
-            });
+            });*/
         {/if}
+        </script>
+
+        <script src="{base_url}/assets/js/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="{base_url}/assets/js//ckeditor/{$galette_lang}.js"></script>
+        <script language="javascript">
+            $(document).ready(function() {
+                $('#mailing_corps').hide().parent().append($('<div id="ckeditor"></div>'));
+                BalloonEditor
+                    .create( document.querySelector( '#ckeditor' ), {
+                        language: '{$galette_lang}'
+                    } )
+                    .catch( error => {
+                        console.error( error );
+                    } );
+            });
         </script>
     {/if}
 {/if}

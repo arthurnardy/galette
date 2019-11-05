@@ -125,7 +125,16 @@ function scripts() {
     .pipe(uglify())
     .pipe(gulp.dest(_dir));
 
-  return merge(main, jstree, jqplot, picker);
+  editor = gulp.src([
+      './node_modules/@ckeditor/ckeditor5-build-balloon/build/ckeditor.js',
+      './node_modules/@ckeditor/ckeditor5-build-balloon/build/translations/*',
+  ])
+    //.pipe(concat('galette-ckeditor.bundle.min.js'))
+    //.pipe(uglify())
+    .pipe(gulp.dest(_dir + '/ckeditor/'));
+
+
+  return merge(main, jstree, jqplot, picker, editor);
 };
 
 function assets() {
