@@ -43,6 +43,9 @@ var main_assets = [
         'src': './galette/webroot/themes/default/jquery-ui/images/*',
         'dest': '/images/'
     }, {
+        'src': './galette/webroot/themes/default/images/desktop/*',
+        'dest': '/images/desktop/'
+    }, {
         'src': './node_modules/farbstastic/*.png',
         'dest': '/images/'
     }, {
@@ -68,7 +71,7 @@ function styles() {
   main = gulp.src(main_styles)
     .pipe(replace('jquery-ui/images/', '../images/'))
     .pipe(replace('("images/ui', '("../images/ui')) //
-    .pipe(replace('url(images/', 'url(../../themes/default/images/'))
+    .pipe(replace('url(images/', 'url(../images/'))
     .pipe(cleanCSS())
     .pipe(concat('galette-main.bundle.min.css'))
     .pipe(gulp.dest(_dir));
