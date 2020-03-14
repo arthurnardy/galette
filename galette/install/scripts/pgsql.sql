@@ -465,14 +465,14 @@ CREATE TABLE galette_searches (
 -- add index on table to look for existing searches
 CREATE INDEX galette_searches_idx ON galette_searches (form, parameters_sum, id_adh);
 
--- new table for temporary passwords  2006-02-18;
+-- new table for temporary links
 DROP TABLE IF EXISTS galette_tmplinks;
 CREATE TABLE galette_tmplinks (
-  id_adh integer REFERENCES galette_adherents (id_adh) ON DELETE CASCADE ON UPDATE CASCADE,
   hash character varying(60) NOT NULL,
   target smallint NOT NULL,
+  id integer NOT NULL,
   creation_date timestamp NOT NULL,
-  PRIMARY KEY (hash)
+  PRIMARY KEY (target, id)
 );
 
 -- table for database version

@@ -331,12 +331,11 @@ CREATE TABLE galette_searches (
 -- new table for temporary links
 DROP TABLE IF EXISTS galette_tmplinks;
 CREATE TABLE galette_tmplinks (
-  id_adh int(10) unsigned,
   hash varchar(60) NOT NULL,
   target smallint(1) NOT NULL,
+  id int(10) unsigned,
   creation_date datetime NOT NULL,
-  PRIMARY KEY (hash),
-  FOREIGN KEY (id_adh) REFERENCES galette_adherents (id_adh) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (target, id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- table for database version
