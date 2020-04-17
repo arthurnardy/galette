@@ -108,7 +108,7 @@ class Links
                 $e->getMessage(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -126,11 +126,19 @@ class Links
         $this->removeOldEntry($target, $id);
 
         //second, generate a new hash and store it in the database
-        //hash is a password for generated code that is sent only in the email.
-        $code = mt_rand(100000, 999999);
-        $hash = password_hash($code, PASSWORD_BCRYPT);
-
         try {
+            $select = $this->zdb->select(Adherent::TABLE);
+            $select->columns([Adherent::PK, 'email_adh']);
+
+            //id_adh would come from contributions table for receipts and invoices
+            $select->where([Adherent::PK => $id]);
+            $results = $this->zdb->execute($select);
+            $result = $results->current();
+            $code = $result->email_adh;
+            //$code = mt_rand(100000, 999999);
+            $hash = password_hash($code, PASSWORD_BCRYPT);
+
+
             $values = array(
                 'target'        => $target,
                 'id'            => $id,
@@ -156,8 +164,20 @@ class Links
                 $e->getMessage(),
                 Analog::ERROR
             );
-            return false;
+            throw $e;
         }
+    }
+
+    /**
+     * Get expiration date
+     *
+     * @return \DateTime
+     */
+    private function getExpirationDate()
+    {
+        $date = new \DateTime();
+        $date->sub(new \DateInterval('P1W'));
+        return $date;
     }
 
     /**
@@ -167,10 +187,8 @@ class Links
      */
     protected function cleanExpired()
     {
-        $date = new \DateTime();
-        $date->sub(new \DateInterval('PT1W'));
-
         try {
+            $date = $this->getExpirationDate();
             $delete = $this->zdb->delete(self::TABLE);
             $delete->where->lessThan(
                 'creation_date',
@@ -182,14 +200,16 @@ class Links
                     'Expired temporary links has been deleted.',
                     Analog::DEBUG
                 );
+                return true;
             }
+            return false;
         } catch (\Exception $e) {
             Analog::log(
                 'An error occurred deleting expired temporary links. ' .
                 $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
+            throw $e;
         }
     }
 
@@ -199,23 +219,27 @@ class Links
      * @param string $hash the hash, base64 encoded
      * @param string $code Code sent to validate link
      *
-     * @return false if hash is not valid, ?? otherwise
+     * @return false if hash is not valid, array otherwise
      */
     public function isHashValid($hash, $code)
     {
         try {
             $hash = base64_decode($hash);
             $select = $this->zdb->select(self::TABLE);
-            $select->columns(
-                array(self::PK)
-            )->where(array('hash' => $hash));
+            $select->where(array('hash' => $hash));
+
+            $date = $this->getExpirationDate();
+            $select->where->greaterThanOrEqualTo(
+                'creation_date',
+                $date->format('Y-m-d')
+            );
 
             $results = $this->zdb->execute($select);
 
             if ($results->count() > 0) {
                 $result = $results->current();
                 if (password_verify($code, $result->hash)) {
-                    return [$result->target, $result->id];
+                    return [(int)$result->target, (int)$result->id];
                 }
             }
             return false;
@@ -224,40 +248,7 @@ class Links
                 'An error occurred getting requested hash. ' . $e->getMessage(),
                 Analog::WARNING
             );
-            return false;
-        }
-    }
-
-    /**
-     * Remove a hash that has been used (ie. once password has been updated)
-     *
-     * @param string $hash hash
-     *
-     * @return boolean
-     */
-    public function removeHash($hash)
-    {
-        try {
-            $delete = $this->zdb->delete(self::TABLE);
-            $delete->where(
-                array('hash' => $hash)
-            );
-
-            $del = $this->zdb->execute($delete);
-            if ($del) {
-                Analog::log(
-                    'Hash has been successfully removed',
-                    Analog::DEBUG
-                );
-                return true;
-            }
-        } catch (\Exception $e) {
-            Analog::log(
-                'An error ocured attempting to delete hash' .
-                $e->getMessage(),
-                Analog::WARNING
-            );
-            return false;
+            throw $e;
         }
     }
 }
