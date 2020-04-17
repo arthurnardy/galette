@@ -101,7 +101,11 @@ class Links extends atoum
         $hist = $this->history;
         $i18n = $this->i18n;
 
-        //$this->contrib = new \Galette\Entity\Contribution($this->zdb, $this->login);
+        $status = new \Galette\Entity\Status($this->zdb);
+        if (count($status->getList()) === 0) {
+            $res = $status->installInit();
+            $this->boolean($res)->isTrue();
+        }
 
         include_once GALETTE_ROOT . 'includes/fields_defs/members_fields.php';
         $this->members_fields = $members_fields;
