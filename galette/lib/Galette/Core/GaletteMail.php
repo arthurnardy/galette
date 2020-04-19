@@ -68,6 +68,10 @@ class GaletteMail
     const SENDER_CURRENT = 1;
     const SENDER_OTHER = 2;
 
+    // set a standard mail rate : to avoid spamming, not to send more than
+    // 14 mails per second. The number is computed in microsecond.
+    const TIME_CEILING = 1.0 / 14000.0;
+
     private $sender_name;
     private $sender_address;
     private $subject;
@@ -76,8 +80,9 @@ class GaletteMail
     private $word_wrap = 70;
     private $timeout = 300;
 
-    private $errors = array();
     private $recipients = array();
+    private $errors = array();
+    private $sucesses = array();
 
     private $mail = null;
     protected $attachments = array();
@@ -118,7 +123,8 @@ class GaletteMail
                 // enables SMTP debug information (for testing)
                 /*$this->mail->SMTPDebug = 2;*/
 
-                if ($this->preferences->pref_mail_method == self::METHOD_GMAIL) {
+                if ($this->preferences->pref_mail_method == self::METHOD_GMAIL)
+                {
                     // sets GMAIL as the SMTP server
                     $this->mail->Host = "smtp.gmail.com";
                     // enable SMTP authentication
@@ -127,7 +133,9 @@ class GaletteMail
                     $this->mail->SMTPSecure = "tls";
                     // set the SMTP port for the GMAIL server
                     $this->mail->Port = 587;
-                } else {
+                }
+                else
+                {
                     $this->mail->Host = $this->preferences->pref_mail_smtp_host;
                     $this->mail->SMTPAuth   = $this->preferences->pref_mail_smtp_auth;
                     $this->mail->SMTPSecure = $this->preferences->pref_mail_smtp_secure;
@@ -144,21 +152,17 @@ class GaletteMail
                         );
                     }
 
-                    if ($this->preferences->pref_mail_smtp_port
-                        && $this->preferences->pref_mail_smtp_port != ''
-                    ) {
+                    if ($this->preferences->pref_mail_smtp_port && $this->preferences->pref_mail_smtp_port != '')
+                    {
                         // set the SMTP port for the SMTP server
                         $this->mail->Port = $this->preferences->pref_mail_smtp_port;
-                    } else {
-                        Analog::log(
-                            '[' . get_class($this) .
-                            ']No SMTP port provided. Switch to default (25).',
-                            Analog::INFO
-                        );
+                    }
+                    else
+                    {
+                        Analog::log('['.get_class($this).']No SMTP port provided. Switch to default (25).',Analog::INFO);
                         $this->mail->Port = 25;
                     }
                 }
-
                 // SMTP account username
                 $this->mail->Username   = $this->preferences->pref_mail_smtp_user;
                 // SMTP account password
@@ -203,23 +207,19 @@ class GaletteMail
 
         $this->recipients = array();
         foreach ($recipients as $mail => $name) {
-            if (self::isValidEmail($mail)) {
+            if (self::isValidEmail($mail))
+            {
                 $this->recipients[$mail] = $name;
-                $this->mail->AddBCC($mail, $name);
-            } else {
-                //one of addresses is not valid :
-                //- set $res to false
-                //- clear BCCs
-                //- log an INFO
-                $res = false;
-                Analog::log(
-                    '[' . get_class($this) .
-                    '] One of recipients address is not valid.',
-                    Analog::INFO
-                );
-                $this->mail->ClearBCCs();
-                break;
+                continue;
             }
+            //one of addresses is not valid :
+            //- set $res to false
+            //- clear BCCs
+            //- log an INFO
+            $res = false;
+            Analog::log('['. get_class($this).'] One of recipients address is not valid.', Analog::INFO);
+            $this->mail->ClearBCCs();
+            break;
         }
         return $res;
     }
@@ -247,8 +247,6 @@ class GaletteMail
         } else {
             $this->mail->AddReplyTo($this->getSenderAddress());
         }
-
-
         if ($this->html) {
             //the email is html :(
             $this->mail->AltBody = $this->cleanedHtml();
@@ -261,22 +259,6 @@ class GaletteMail
 
         $this->mail->Subject = $this->subject;
         $this->mail->Body = $this->message;
-
-        //set at least on real recipient (not bcc)
-        if (count($this->recipients) === 1) {
-            //there is only one recipient, clean bcc and readd as simple recipient
-            $this->mail->ClearBCCs();
-            $this->mail->AddAddress(
-                key($this->recipients),
-                current($this->recipients)
-            );
-        } else {
-            //we're sending a mailing. Set main recipient to sender
-            $this->mail->AddAddress(
-                $this->getSenderAddress(),
-                $this->getSenderName()
-            );
-        }
 
         if (trim($this->preferences->pref_mail_sign) != '') {
             $patterns = array(
@@ -330,41 +312,64 @@ class GaletteMail
             }
         }
 
-        try {
-            //reinit errors array
-            $this->errors = array();
-            //let's send the email
-            if (!$this->mail->Send()) {
-                $this->errors[] = $this->mail->ErrorInfo;
-                Analog::log(
-                    'An error occurred sending email to: ' .
-                    implode(', ', array_keys($this->recipients)) .
-                    "\n" . $this->mail->ErrorInfo,
-                    Analog::INFO
-                );
-                $this->mail = null;
-                return self::MAIL_ERROR;
-            } else {
-                $txt = '';
-                foreach ($this->recipients as $k => $v) {
-                    $txt .= $v . ' (' . $k . '), ';
+        //reinit errors and sucess arrays
+        $this->errors = array();
+        $this->sucesses = array();
+        $message = "";
+
+        foreach ($this->recipients as $mail => $name)
+        {
+            // We send to a new recipient, we clear all recipients before
+            $this->mail->clearAllRecipients();
+            $this->mail->AddAddress($mail,$name);
+            try
+            {
+                // The true given to microtime function is necessary to
+                // get the response as a float.
+                $preTime = microtime(true);
+                //let's send the email
+                if ($this->mail->Send())
+                {
+                    // if it succeeded we save a log message to display
+                    // pitching the good news
+                    $message ='An email has been sent to: '.$mail;
+                    array_push($this->sucesses, $message);
+                    // We delay the end of the process to avoid spamming
+                    while((microtime(true) - $preTime) < self::TIME_CEILING)
+                    {
+                        // nothing, just waiting
+                    }
+                    continue;
                 }
-                Analog::log(
-                    'An email has been sent to: ' . $txt,
-                    Analog::INFO
-                );
-                $this->mail = null;
-                return self::MAIL_SENT;
+                // If it fails, we keep a log message to display the bad news
+                $message = 'An error occurred sending email to: '.$mail."\n".$this->mail->ErrorInfo.'';
+                array_push($this->errors, $message);
             }
-        } catch (\Exception $e) {
-            Analog::log(
-                'Error sending message: ' . $e->getMessage(),
-                Analog::ERROR
-            );
-            $this->errors[] = $e->getMessage();
-            $this->mail = null;
+            catch (\Exception $ex)
+            {
+                // If the mail failed to be sent, we consider keeping a log message in memory to display later,
+                // we keep trying sending to other recipients. Maybe the mistake is only due to recipient.
+                $message = 'An error occurred sending email to: '.$mail."\n".$ex->getMessage().'';
+                array_push($this->errors, $message);
+            }
+        }
+        // We display all the recipients who succeeded :
+        foreach ($this->sucesses as $message)
+        {
+            Analog::log($message,Analog::INFO);
+        }
+        // If there is any errors
+        if(count($this->errors) > 0)
+        {
+            // We display every error in the console
+            foreach ($this->errors as $message)
+            {
+                Analog::log($message, Analog::ERROR);
+            }
+            // and we return a code indicating the sending failed
             return self::MAIL_ERROR;
         }
+        return self::MAIL_SENT;
     }
 
     /**
