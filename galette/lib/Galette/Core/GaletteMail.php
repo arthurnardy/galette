@@ -334,17 +334,16 @@ class GaletteMail
                 {
                     // nothing, just waiting
                 }
-                // The true given to microtime function is necessary to
-                // get the response as a float.
-                $preTime = microtime(true);
                 //let's send the email
                 if ($this->mail->Send())
                 {
-                    // if it succeeded we save a log message to display
+                    // The true given to microtime function is necessary to
+                    // get the response as a float.
+                    $preTime = microtime(true);
                     // pitching the good news
                     $message ='An email has been sent to: '.$mail;
                     array_push($this->sucesses, $message);
-                   continue;
+                    continue;
                 }
                 // If it fails, we keep a log message to display the bad news
                 $message = 'An error occurred sending email to: '.$mail."\n".$this->mail->ErrorInfo.'';
@@ -376,7 +375,6 @@ class GaletteMail
         }
         return self::MAIL_SENT;
     }
-
 
     /**
      * Check if a mail address is valid
