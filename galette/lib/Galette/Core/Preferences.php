@@ -151,9 +151,9 @@ class Preferences
         'pref_instagram' => '',
         'pref_facebook' => '',
         'pref_twitter' => '',
-        'pref_viadeo' => '',
+        'pref_discord' => '',
         'pref_linkedin' => '',
-        'pref_mail_sign' => "{NAME}\r\n\r\n{WEBSITE}\r\n{INSTAGRAM}\r\n{FACEBOOK}\r\n{TWITTER}\r\n{LINKEDIN}\r\n{VIADEO}",
+        'pref_mail_sign' => "{NAME}\r\n\r\n{WEBSITE}\r\n{INSTAGRAM}\r\n{FACEBOOK}\r\n{TWITTER}\r\n{LINKEDIN}\r\n{DISCORD}",
         /* New contribution script */
         'pref_new_contrib_script' => '',
         'pref_bool_wrap_mails' => true,

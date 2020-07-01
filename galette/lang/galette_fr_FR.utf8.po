@@ -5340,8 +5340,8 @@ msgstr ""
 "répertoire d’exports."
 
 #: ../templates/default/preferences.tpl:125
-msgid "Viadeo"
-msgstr "Viadeo"
+msgid "Discord"
+msgstr "Discord"
 
 #: ../install/steps/check.php:94
 msgid ""

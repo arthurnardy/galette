@@ -194,24 +194,24 @@ class Preferences extends atoum
         $delete = $this->zdb->delete(\Galette\Core\Preferences::TABLE);
         $delete->where(
             array(
-                \Galette\Core\Preferences::PK => 'pref_viadeo'
+                \Galette\Core\Preferences::PK => 'pref_discord'
             )
         );
         $this->zdb->execute($delete);
 
         $this->preferences->load();
         $fb = $this->preferences->pref_facebook;
-        $viadeo = $this->preferences->pref_viadeo;
+        $discord = $this->preferences->pref_discord;
 
         $this->boolean($fb)->isFalse();
-        $this->boolean($viadeo)->isFalse();
+        $this->boolean($discord)->isFalse();
 
         $prefs = new \Galette\Core\Preferences($this->zdb);
         $fb = $prefs->pref_facebook;
-        $viadeo = $prefs->pref_viadeo;
+        $discord = $prefs->pref_discord;
 
         $this->variable($fb)->isIdenticalTo('');
-        $this->variable($viadeo)->isIdenticalTo('');
+        $this->variable($discord)->isIdenticalTo('');
     }
 
     /**

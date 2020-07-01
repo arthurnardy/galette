@@ -122,8 +122,8 @@
                     <input type="text" name="pref_linkedin" id="pref_linkedin" value="{$pref.pref_linkedin}" class="large"/>
                 </p>
                 <p>
-                    <label for="pref_viadeo" class="bline">{_T string="Viadeo"}</label>
-                    <input type="text" name="pref_viadeo" id="pref_viadeo" value="{$pref.pref_viadeo}" class="large"/>
+                    <label for="pref_discord" class="bline">{_T string="Discord"}</label>
+                    <input type="text" name="pref_discord" id="pref_discord" value="{$pref.pref_discord}" class="large"/>
                 </p>
             </fieldset>
 

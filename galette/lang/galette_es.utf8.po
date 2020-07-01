@@ -5147,7 +5147,7 @@ msgid ""
 msgstr ""
 
 #: ../templates/default/preferences.tpl:125
-msgid "Viadeo"
+msgid "Discord"
 msgstr ""
 
 #: ../install/steps/check.php:94

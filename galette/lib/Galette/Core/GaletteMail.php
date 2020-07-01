@@ -272,7 +272,7 @@ class GaletteMail
                 '/{INSTAGRAM}/',
                 '/{TWITTER}/',
                 '/{LINKEDIN}/',
-                '/{VIADEO}/'
+                '/{DISCORD}/'
             );
 
             $replaces = array(
@@ -282,7 +282,7 @@ class GaletteMail
                 $this->preferences->pref_instagram,
                 $this->preferences->pref_twitter,
                 $this->preferences->pref_linkedin,
-                $this->preferences->pref_viadeo
+                $this->preferences->pref_discord
             );
 
             $sign = preg_replace(

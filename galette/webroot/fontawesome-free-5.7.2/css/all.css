@@ -4015,10 +4015,10 @@ readers do not read off random characters that represent icons */
 .fa-viacoin:before {
   content: "\f237"; }
 
-.fa-viadeo:before {
+.fa-discord:before {
   content: "\f2a9"; }
 
-.fa-viadeo-square:before {
+.fa-discord-square:before {
   content: "\f2aa"; }
 
 .fa-vial:before {
