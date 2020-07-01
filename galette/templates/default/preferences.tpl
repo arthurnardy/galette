@@ -106,8 +106,8 @@
             <fieldset class="cssform" id="social">
                 <legend>{_T string="Social networks"}</legend>
                 <p>
-                    <label for="pref_googleplus" class="bline">{_T string="Google+"}</label>
-                    <input type="text" name="pref_googleplus" id="pref_googleplus" value="{$pref.pref_googleplus}" class="large"/>
+                    <label for="pref_instagram" class="bline">{_T string="Instagram"}</label>
+                    <input type="text" name="pref_instagram" id="pref_instagram" value="{$pref.pref_instagram}" class="large"/>
                 </p>
                 <p>
                     <label for="pref_facebook" class="bline">{_T string="Facebook"}</label>

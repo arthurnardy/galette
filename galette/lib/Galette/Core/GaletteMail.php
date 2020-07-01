@@ -269,7 +269,7 @@ class GaletteMail
                 '/{NAME}/',
                 '/{WEBSITE}/',
                 '/{FACEBOOK}/',
-                '/{GOOGLEPLUS}/',
+                '/{INSTAGRAM}/',
                 '/{TWITTER}/',
                 '/{LINKEDIN}/',
                 '/{VIADEO}/'
@@ -279,7 +279,7 @@ class GaletteMail
                 $this->preferences->pref_nom,
                 $this->preferences->pref_website,
                 $this->preferences->pref_facebook,
-                $this->preferences->pref_googleplus,
+                $this->preferences->pref_instagram,
                 $this->preferences->pref_twitter,
                 $this->preferences->pref_linkedin,
                 $this->preferences->pref_viadeo

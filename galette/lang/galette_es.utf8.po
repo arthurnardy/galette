@@ -1672,8 +1672,8 @@ msgstr ""
 
 #: ../templates/default/preferences.tpl:109
 #, fuzzy
-msgid "Google+"
-msgstr "Google+"
+msgid "Instagram"
+msgstr "Instagram"
 
 #: ../lib/Galette/Entity/Reminder.php:274
 msgid "Sent reminder mail for impending membership"

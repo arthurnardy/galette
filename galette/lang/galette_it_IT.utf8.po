@@ -1637,7 +1637,7 @@ msgid "An error occurred trying to remove searches :/"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:109
-msgid "Google+"
+msgid "Instagram"
 msgstr ""
 
 #: ../lib/Galette/Entity/Reminder.php:274
