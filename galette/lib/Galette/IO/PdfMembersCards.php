@@ -212,24 +212,15 @@ class PdfMembersCards extends Pdf
                     $email .= $member->email;
                     break;
                 case 1:
-                    $email .= $member->msn;
-                    break;
-                case 2:
-                    $email .= $member->jabber;
-                    break;
-                case 3:
                     $email .= $member->website;
                     break;
-                case 4:
-                    $email .= $member->icq;
-                    break;
-                case 5:
+                case 2:
                     $email .= $member->zipcode . ' - ' . $member->town;
                     break;
-                case 6:
+                case 3:
                     $email .= $member->nickname;
                     break;
-                case 7:
+                case 4:
                     $email .= $member->job;
                     break;
             }
