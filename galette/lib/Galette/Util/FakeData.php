@@ -444,8 +444,7 @@ class FakeData
             'id_statut'         => $faker->optional($weight = 0.3, $default = Status::DEFAULT_STATUS)
                                     ->randomElement($this->status),
             'date_crea_adh'     => $creation_date->format(_T("Y-m-d")),
-            'pref_lang'         => $faker->randomElement(array_keys($this->i18n->getArrayList())),
-            'fingerprint'       => 'FAKER' . ($this->seed !== null ? $this->seed : '')
+            'pref_lang'         => $faker->randomElement(array_keys($this->i18n->getArrayList()))
         ];
 
         if ($faker->boolean($chanceOfGettingTrue = 20)) {

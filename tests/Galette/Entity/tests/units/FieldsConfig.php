@@ -239,24 +239,6 @@ class FieldsConfig extends atoum
 
         $town['required'] = false;
         $town['visible'] = \Galette\Entity\FieldsConfig::NOBODY;
-
-        //jabber
-        $jabber = $fields[3][10];
-        unset($fields[3][10]);
-        $jabber['category'] = 1;
-        $fields[1][] = $jabber;
-
-        $this->boolean($fields_config->setFields($fields))->isTrue();
-
-        $fields_config->load();
-        $fields = $fields_config->getCategorizedFields();
-
-        $town = $fields[3][3];
-        $this->boolean($town['required'])->isFalse();
-        $this->integer($town['visible'])->isIdenticalTo(\Galette\Entity\FieldsConfig::NOBODY);
-
-        $jabber2 = $fields[1][12];
-        $this->array($jabber2)->isIdenticalTo($jabber);
     }
 
     /**

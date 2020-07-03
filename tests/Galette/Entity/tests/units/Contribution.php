@@ -96,7 +96,6 @@ class Contribution extends atoum
         $delete->where(['info_cotis' => 'FAKER' . $this->seed]);
         $this->zdb->execute($delete);
         $delete = $this->zdb->delete(\Galette\Entity\Adherent::TABLE);
-        $delete->where(['fingerprint' => 'FAKER' . $this->seed]);
         $this->zdb->execute($delete);
     }
 
@@ -424,7 +423,6 @@ class Contribution extends atoum
             'activite_adh' => true,
             'id_statut' => 9,
             'pref_lang' => 'en_US',
-            'fingerprint' => 'FAKER' . $this->seed,
             'societe_adh' => ''
         ];
         $expecteds = array_merge($expecteds, $new_expecteds);
@@ -662,8 +660,7 @@ class Contribution extends atoum
             [
                 'nom_adh'                   => 'Overlapped',
                 'date_crea_adh'             => date(_T("Y-m-d")),
-                \Galette\Entity\Status::PK  => \Galette\Entity\Status::DEFAULT_STATUS,
-                'fingerprint'               => 'FAKER' . $this->seed
+                \Galette\Entity\Status::PK  => \Galette\Entity\Status::DEFAULT_STATUS
             ],
             [],
             []

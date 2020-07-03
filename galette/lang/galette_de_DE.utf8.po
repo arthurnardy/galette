@@ -389,8 +389,8 @@ msgid "Plugin '%name' has been successfully installed!"
 msgstr "Das Plugin '%name' wurde erfolgreich installiert!"
 
 #: ../includes/fields_defs/members_fields.php:188
-msgid "ICQ:"
-msgstr "ICQ:"
+msgid "Twitter:"
+msgstr "Twitter:"
 
 #: ../templates/default/plugins.tpl:90
 msgid "No inactive plugin."
@@ -674,8 +674,8 @@ msgid "Label does not exist"
 msgstr "- Beschreibung existiert nicht"
 
 #: ../templates/default/preferences.tpl:473
-msgid "ICQ"
-msgstr "ICQ"
+msgid "Twitter"
+msgstr "Twitter"
 
 #: ../templates/default/gestion_pdf.tpl:47
 msgid "Member's name"
@@ -1476,8 +1476,8 @@ msgid "Members selection"
 msgstr "Mitgliedsauswahl"
 
 #: ../templates/default/preferences.tpl:470
-msgid "MSN"
-msgstr "MSN"
+msgid "Discord"
+msgstr "Discord"
 
 #: ../install/steps/db.php:45
 msgid "If it hadn't been made, create a database and a user for Galette."
@@ -2037,8 +2037,8 @@ msgid "Address type:"
 msgstr "Adresstyp:"
 
 #: ../templates/default/preferences.tpl:471
-msgid "Jabber"
-msgstr "Jabber"
+msgid "Telegram"
+msgstr "Telegram"
 
 #: ../lib/Galette/IO/PdfContribution.php:144
 #: ../includes/routes/contributions.routes.php:1109
@@ -2171,8 +2171,8 @@ msgid "Please repeat in the field the password shown in the image."
 msgstr "Bitte geben Sie das im Bild gezeigte Password ein."
 
 #: ../includes/fields_defs/members_fields.php:324
-msgid "Id GNUpg (GPG):"
-msgstr "Id GNUpg (GPG):"
+msgid "GPG (Encryption key):"
+msgstr "GPG (Encryption key):"
 
 #: ../includes/i18n.inc.php:331
 msgid "Vice-president"
@@ -2757,8 +2757,8 @@ msgid "Go back to members list"
 msgstr "Zurück zur Mitgliedsliste"
 
 #: ../includes/fields_defs/members_fields.php:196
-msgid "MSN:"
-msgstr "MSN:"
+msgid "Discord:"
+msgstr "Discord:"
 
 #: ../templates/default/mailing_adherents.tpl:64
 msgid "current logged in user"
@@ -3578,10 +3578,6 @@ msgstr ""
 #: ../lib/Galette/Entity/Group.php:444
 msgid "Fail to add new group."
 msgstr "Konnte die neue  Gruppe nicht hinzufügen."
-
-#: ../includes/fields_defs/members_fields.php:332
-msgid "fingerprint:"
-msgstr "Fingerabdruck:"
 
 #: ../lib/Galette/Handlers/NotFound.php:80 ../templates/default/404.tpl:19
 msgid "Page not found"
@@ -7171,8 +7167,8 @@ msgid "unreachable members:"
 msgstr "nicht erreichbare Mitglieder:"
 
 #: ../includes/fields_defs/members_fields.php:204
-msgid "Jabber:"
-msgstr "Jabber:"
+msgid "Telegram:"
+msgstr "Telegram:"
 
 #: ../templates/default/preferences.tpl:141
 msgid "Default theme:"

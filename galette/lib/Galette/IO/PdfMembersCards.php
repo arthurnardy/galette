@@ -209,22 +209,32 @@ class PdfMembersCards extends Pdf
             $email = '';
             switch ($this->preferences->pref_card_address) {
                 case 0:
-                    $email .= $member->email;
+                    $email .= $member->nickname;
                     break;
                 case 1:
-                    $email .= $member->website;
+                    $email .= $member->email;
                     break;
                 case 2:
                     $email .= $member->zipcode . ' - ' . $member->town;
                     break;
                 case 3:
-                    $email .= $member->nickname;
-                    break;
-                case 4:
                     $email .= $member->job;
                     break;
+                case 4:
+                    $email .= $member->discord;
+                    break;
+                case 5:
+                    $email .= $member->telegram;
+                    break;
+                case 6:
+                    $email .= $member->twitter;
+                    break;
+                case 7:
+                    $email .= $member->website;
+                    break;
+                default:
+                    break;
             }
-
             // Select strip color according to status
             switch ($member->status) {
                 case 1:

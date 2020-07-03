@@ -22,10 +22,10 @@ CREATE TABLE galette_adherents (
   tel_adh varchar(20) default NULL,
   gsm_adh varchar(20) default NULL,
   email_adh varchar(255) default NULL,
-  url_adh varchar(200) default NULL,
-  icq_adh varchar(20) default NULL,
-  msn_adh varchar(150) default NULL,
-  jabber_adh varchar(150) default NULL,
+  url_adh varchar(200) default NULL, 
+  twitter_adh character varying(20),
+  discord_adh character varying(150),
+  telegram_adh character varying(150),
   info_adh text,
   info_public_adh text,
   prof_adh varchar(150) default NULL,
@@ -40,8 +40,6 @@ CREATE TABLE galette_adherents (
   date_echeance date default NULL,
   pref_lang varchar(20) default 'fr_FR',
   lieu_naissance text,
-  gpgid text DEFAULT NULL,
-  fingerprint varchar(50) DEFAULT NULL,
   parent_id int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (id_adh),
   UNIQUE (login_adh),
@@ -333,6 +331,6 @@ DROP TABLE IF EXISTS galette_database;
 CREATE TABLE galette_database (
   version DECIMAL(4,3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-INSERT INTO galette_database(version) VALUES(0.931);
+INSERT INTO galette_database(version) VALUES(0.932);
 
 SET FOREIGN_KEY_CHECKS=1;

@@ -1028,11 +1028,11 @@ class Members
                             . ' OR ' .
                             'LOWER(url_adh) LIKE ' . $token
                             . ' OR ' .
-                            'LOWER(msn_adh) LIKE ' . $token
+                            'LOWER(discord_adh) LIKE ' . $token
                             . ' OR ' .
-                            'LOWER(icq_adh) LIKE ' . $token
+                            'LOWER(twitter_adh) LIKE ' . $token
                             . ' OR ' .
-                            'LOWER(jabber_adh) LIKE ' . $token
+                            'LOWER(telegram_adh) LIKE ' . $token
                             . ')'
                         );
                         break;

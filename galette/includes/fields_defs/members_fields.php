@@ -184,25 +184,25 @@ $members_fields = array(
         'position' => 19,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
-    'icq_adh' => array(
-        'label'    => _T("ICQ:"),
-        'propname' => 'icq',
+    'twitter_adh' => array(
+        'label'    => _T("Twitter:"),
+        'propname' => 'twitter',
         'required' => false,
         'visible'  => FieldsConfig::NOBODY,
         'position' => 20,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
-    'msn_adh' => array(
-        'label'    => _T("MSN:"),
-        'propname' => 'msn',
+    'discord_adh' => array(
+        'label'    => _T("Discord:"),
+        'propname' => 'discord',
         'required' => false,
         'visible'  => FieldsConfig::NOBODY,
         'position' => 22,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
-    'jabber_adh' => array(
-        'label'    => _T("Jabber:"),
-        'propname' => 'jabber',
+    'telegram_adh' => array(
+        'label'    => _T("Telegram:"),
+        'propname' => 'telegram',
         'required' => false,
         'visible'  => FieldsConfig::USER_WRITE,
         'position' => 21,
@@ -321,19 +321,11 @@ $members_fields = array(
         'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
     ),
     'gpgid' => array(
-        'label'    => _T("Id GNUpg (GPG):"),
+        'label'    => _T("GPG (Encryption key):"),
         'propname' => 'gnupgid',
         'required' => false,
         'visible'  => FieldsConfig::USER_WRITE,
         'position' => 23,
-        'category' => FieldsCategories::ADH_CATEGORY_CONTACT
-    ),
-    'fingerprint' => array(
-        'label'    => _T("fingerprint:"),
-        'propname' => 'fingerprint',
-        'required' => false,
-        'visible'  => FieldsConfig::NOBODY,
-        'position' => 24,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
     'parent_id'     => array(

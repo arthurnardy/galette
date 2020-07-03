@@ -75,7 +75,6 @@ class Login extends atoum
     {
         $this->zdb = new \Galette\Core\Db();
         $delete = $this->zdb->delete(\Galette\Entity\Adherent::TABLE);
-        $delete->where(['fingerprint' => 'FAKER' . $this->seed]);
         $this->zdb->execute($delete);
     }
 
@@ -302,7 +301,6 @@ class Login extends atoum
     private function createUser()
     {
         $select = $this->zdb->select(\Galette\Entity\Adherent::TABLE, 'a');
-        $select->where(array('a.fingerprint' => 'FAKER' . $this->seed));
         $results = $this->zdb->execute($select);
 
         global $zdb, $login, $hist, $i18n; // globals :(

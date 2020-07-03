@@ -68,13 +68,10 @@
                             {assign var="size" value="8"}
                         {/if}
                         {if $entry->field_id eq 'email_adh'
-                            or $entry->field_id eq 'msn_adh'
-                            or $entry->field_id eq 'jabber_adh'
+                            or $entry->field_id eq 'discord_adh'
+                            or $entry->field_id eq 'telegram_adh'
                             or $entry->field_id eq 'url_adh'}
                             {assign var="size" value="30"}
-                        {/if}
-                        {if $entry->field_id eq 'fingerprint'}
-                            {assign var="size" value="40"}
                         {/if}
                         {if $entry->field_id eq 'bool_display_info'}
                             {assign var="title" value={_T string="Do member want to appear publically?"}}

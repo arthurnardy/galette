@@ -316,7 +316,7 @@ msgid "Plugin '%name' has been successfully installed!"
 msgstr ""
 
 #: ../includes/fields_defs/members_fields.php:188
-msgid "ICQ:"
+msgid "Twitter:"
 msgstr ""
 
 #: ../templates/default/plugins.tpl:90
@@ -578,7 +578,7 @@ msgid "Label does not exist"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:473
-msgid "ICQ"
+msgid "Twitter"
 msgstr ""
 
 #: ../templates/default/gestion_pdf.tpl:47
@@ -1295,7 +1295,7 @@ msgid "Members selection"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:470
-msgid "MSN"
+msgid "Discord"
 msgstr ""
 
 #: ../install/steps/db.php:45
@@ -1810,7 +1810,7 @@ msgid "Address type:"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:471
-msgid "Jabber"
+msgid "Telegram"
 msgstr ""
 
 #: ../lib/Galette/IO/PdfContribution.php:144 ../includes/routes/contributions.routes.php:1109
@@ -1930,7 +1930,7 @@ msgid "Please repeat in the field the password shown in the image."
 msgstr ""
 
 #: ../includes/fields_defs/members_fields.php:324
-msgid "Id GNUpg (GPG):"
+msgid "GPG (Encryption key):"
 msgstr ""
 
 #: ../includes/i18n.inc.php:331
@@ -2445,7 +2445,7 @@ msgid "Go back to members list"
 msgstr ""
 
 #: ../includes/fields_defs/members_fields.php:196
-msgid "MSN:"
+msgid "Discord:"
 msgstr ""
 
 #: ../templates/default/mailing_adherents.tpl:64
@@ -3157,10 +3157,6 @@ msgstr ""
 
 #: ../lib/Galette/Entity/Group.php:444
 msgid "Fail to add new group."
-msgstr ""
-
-#: ../includes/fields_defs/members_fields.php:332
-msgid "fingerprint:"
 msgstr ""
 
 #: ../lib/Galette/Handlers/NotFound.php:80 ../templates/default/404.tpl:19
@@ -6358,7 +6354,7 @@ msgid "unreachable members:"
 msgstr ""
 
 #: ../includes/fields_defs/members_fields.php:204
-msgid "Jabber:"
+msgid "Telegram:"
 msgstr ""
 
 #: ../templates/default/preferences.tpl:141

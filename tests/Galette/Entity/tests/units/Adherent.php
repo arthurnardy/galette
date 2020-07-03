@@ -91,7 +91,6 @@ class Adherent extends atoum
     {
         $this->zdb = new \Galette\Core\Db();
         $delete = $this->zdb->delete(\Galette\Entity\Adherent::TABLE);
-        $delete->where(['fingerprint' => 'FAKER' . $this->seed]);
         $this->zdb->execute($delete);
     }
 
@@ -160,8 +159,6 @@ class Adherent extends atoum
     private function adhExists()
     {
         $select = $this->zdb->select(\Galette\Entity\Adherent::TABLE, 'a');
-        $select->where(array('a.fingerprint' => 'FAKER' . $this->seed));
-
         $results = $this->zdb->execute($select);
         if ($results->count() === 0) {
             return false;
@@ -341,7 +338,6 @@ class Adherent extends atoum
             'activite_adh' => true,
             'id_statut' => 9,
             'pref_lang' => 'en_US',
-            'fingerprint' => 'FAKER95842354',
             'societe_adh' => ''
         ];
         $expecteds = array_merge($expecteds, $new_expecteds);

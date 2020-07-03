@@ -457,14 +457,14 @@
                 <p>
                     <label for="pref_card_address" class="bline">{_T string="Address type:"}</label>
                     <select name="pref_card_address" id="pref_card_address">
-                        <option value="0" {if $pref.pref_card_address eq 0}selected="selected"{/if}>{_T string="Email"}</option>
-                        <option value="1" {if $pref.pref_card_address eq 1}selected="selected"{/if}>{_T string="MSN"}</option>
-                        <option value="2" {if $pref.pref_card_address eq 2}selected="selected"{/if}>{_T string="Jabber"}</option>
-                        <option value="3" {if $pref.pref_card_address eq 3}selected="selected"{/if}>{_T string="Web Site"}</option>
-                        <option value="4" {if $pref.pref_card_address eq 4}selected="selected"{/if}>{_T string="ICQ"}</option>
-                        <option value="5" {if $pref.pref_card_address eq 5}selected="selected"{/if}>{_T string="Zip - Town"}</option>
-                        <option value="6" {if $pref.pref_card_address eq 6}selected="selected"{/if}>{_T string="Nickname"}</option>
-                        <option value="7" {if $pref.pref_card_address eq 7}selected="selected"{/if}>{_T string="Profession"}</option>
+                        <option value="0" {if $pref.pref_card_address eq 6}selected="selected"{/if}>{_T string="Nickname"}</option>
+                        <option value="1" {if $pref.pref_card_address eq 0}selected="selected"{/if}>{_T string="Email"}</option>
+                        <option value="2" {if $pref.pref_card_address eq 5}selected="selected"{/if}>{_T string="Zip - Town"}</option>
+                        <option value="3" {if $pref.pref_card_address eq 7}selected="selected"{/if}>{_T string="Profession"}</option>
+                        <option value="4" {if $pref.pref_card_address eq 1}selected="selected"{/if}>{_T string="Discord"}</option>
+                        <option value="5" {if $pref.pref_card_address eq 2}selected="selected"{/if}>{_T string="Telegram"}</option>
+                        <option value="6" {if $pref.pref_card_address eq 4}selected="selected"{/if}>{_T string="Twitter"}</option>
+                        <option value="7" {if $pref.pref_card_address eq 3}selected="selected"{/if}>{_T string="Web Site"}</option>
                     </select>
                     <span class="exemple">{_T string="(Choose address printed below name)"}</span>
                 </p>

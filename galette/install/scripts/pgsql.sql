@@ -200,10 +200,10 @@ CREATE TABLE galette_adherents (
     tel_adh character varying(20),
     gsm_adh character varying(20),
     email_adh character varying(255),
-    url_adh character varying(200),
-    icq_adh character varying(20),
-    msn_adh character varying(150),
-    jabber_adh character varying(150),
+    url_adh character varying(200), 
+    twitter_adh character varying(20),
+    discord_adh character varying(150),
+    telegram_adh character varying(150),
     info_adh text,
     info_public_adh text,
     prof_adh character varying(150),
@@ -218,8 +218,6 @@ CREATE TABLE galette_adherents (
     date_echeance date,
     pref_lang character varying(20) DEFAULT 'fr_FR',
     lieu_naissance text DEFAULT '',
-    gpgid text DEFAULT NULL,
-    fingerprint character varying(50) DEFAULT NULL,
     parent_id integer DEFAULT NULL REFERENCES galette_adherents(id_adh) ON DELETE RESTRICT ON UPDATE CASCADE,
     PRIMARY KEY (id_adh)
 );
@@ -465,10 +463,9 @@ CREATE TABLE galette_searches (
 -- add index on table to look for existing searches
 CREATE INDEX galette_searches_idx ON galette_searches (form, parameters_sum, id_adh);
 
-
 -- table for database version
 DROP TABLE IF EXISTS galette_database;
 CREATE TABLE galette_database (
   version decimal NOT NULL
 );
-INSERT INTO galette_database (version) VALUES(0.931);
+INSERT INTO galette_database (version) VALUES(0.932);

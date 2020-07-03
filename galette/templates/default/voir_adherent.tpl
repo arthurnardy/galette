@@ -175,7 +175,7 @@ We have to use a template file, so Smarty will do its work (like replacing varia
                     <i class="fas fa-venus fa-fw"></i>
             {/if}
         {/if}
-        {if $element->field_id eq 'email_adh' or $element->field_id eq 'msn_adh'}
+        {if $element->field_id eq 'email_adh'}
                         <a href="mailto:{$value}">{$value}</a>
         {elseif $element->field_id eq 'url_adh'}
                         <a href="{$value}">{$value}</a>

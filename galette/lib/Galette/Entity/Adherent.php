@@ -102,11 +102,10 @@ class Adherent
     private $_gsm;
     private $_email;
     private $_website;
-    private $_msn; /** TODO: remove */
-    private $_icq; /** TODO: remove */
-    private $_jabber; /** TODO: remove */
-    private $_gnupgid; /** TODO: remove */
-    private $_fingerprint; /** TODO: remove */
+    private $_discord; /** TODO: remove */
+    private $_twitter; /** TODO: remove */
+    private $_telegram; /** TODO: remove */
+    private $_gnupgid; 
     //Galette relative informations
     private $_appears_in_list;
     private $_admin;
@@ -327,16 +326,10 @@ class Adherent
         $this->_gsm = $r->gsm_adh;
         $this->_email = $r->email_adh;
         $this->_website = $r->url_adh;
-        /** TODO: remove */
-        $this->_msn = $r->msn_adh;
-        /** TODO: remove */
-        $this->_icq = $r->icq_adh;
-        /** TODO: remove */
-        $this->_jabber = $r->jabber_adh;
-        /** TODO: remove */
+        $this->_discord = $r->discord_adh;
+        $this->_twitter = $r->twitter_adh;
+        $this->_telegram = $r->telegram_adh;
         $this->_gnupgid = $r->gpgid;
-        /** TODO: remove */
-        $this->_fingerprint = $r->fingerprint;
         //Galette relative informations
         $this->_appears_in_list = ($r->bool_display_info == 1) ? true : false;
         $this->_admin = ($r->bool_admin_adh == 1) ? true : false;
@@ -1176,7 +1169,6 @@ class Adherent
                 }
                 break;
             case 'email_adh':
-            case 'msn_adh':
                 if (!GaletteMail::isValidEmail($value)) {
                     $this->errors[] = _T("- Non-valid E-Mail address!") .
                         ' (' . $this->getFieldLabel($field) . ')';
