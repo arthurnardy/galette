@@ -47,13 +47,13 @@ $members_fields_cats = array(
     array(
         'id'         => 2,
         'table_name' => Adherent::TABLE,
-        'category'   => "Galette-related data:",
-        'position'   => 3
+        'category'   => "Contact information:",
+        'position'   => 2
     ),
     array(
         'id'         => 3,
         'table_name' => Adherent::TABLE,
-        'category'   => "Contact information:",
-        'position'   => 2
+        'category'   => "Galette-related data:",
+        'position'   => 3
     )
 );

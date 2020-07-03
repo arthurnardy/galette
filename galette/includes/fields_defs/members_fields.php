@@ -47,13 +47,21 @@ $members_fields = array(
         'position' => 0,
         'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
     ),
-    'id_statut' => array(
-        'label'    => _T("Status:"),
-        'propname' => 'status',
+    'titre_adh' => array(
+        'label'    => _T("Title:"),
+        'propname' => 'title',
         'required' => false,
-        'visible'  => FieldsConfig::STAFF,
-        'position' => 27,
-        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
+        'visible'  => FieldsConfig::USER_WRITE,
+        'position' => 1,
+        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
+    ),
+    'sexe_adh' => array(
+        'label'    => _T("Gender:"),
+        'propname' => 'gender',
+        'required' => false,
+        'visible'  => FieldsConfig::USER_WRITE,
+        'position' => 2,
+        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
     ),
     'nom_adh' => array(
         'label'    => _T("Name:"),
@@ -87,14 +95,6 @@ $members_fields = array(
         'position' => 6,
         'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
     ),
-    'titre_adh' => array(
-        'label'    => _T("Title:"),
-        'propname' => 'title',
-        'required' => false,
-        'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 1,
-        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
-    ),
     'ddn_adh' => array(
         'label'    => _T("Birth date:"),
         'propname' => 'birthdate',
@@ -103,12 +103,28 @@ $members_fields = array(
         'position' => 7,
         'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
     ),
-    'sexe_adh' => array(
-        'label'    => _T("Gender:"),
-        'propname' => 'gender',
+    'lieu_naissance' => array(
+        'label'    => _T("Birthplace:"),
+        'propname' => 'birth_place',
         'required' => false,
         'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 2,
+        'position' => 8,
+        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
+    ),
+    'prof_adh' => array(
+        'label'    => _T("Profession:"),
+        'propname' => 'job',
+        'required' => false,
+        'visible'  => FieldsConfig::USER_WRITE,
+        'position' => 9,
+        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
+    ),
+    'pref_lang' => array(
+        'label'    => _T("Language:"),
+        'propname' => 'language',
+        'required' => false,
+        'visible'  => FieldsConfig::USER_WRITE,
+        'position' => 10,
         'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
     ),
     'adresse_adh' => array(
@@ -176,12 +192,20 @@ $members_fields = array(
         'position' => 18,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
+    'gpgid' => array(
+        'label'    => _T("GPG (Encryption key):"),
+        'propname' => 'gnupgid',
+        'required' => false,
+        'visible'  => FieldsConfig::USER_WRITE,
+        'position' => 19,
+        'category' => FieldsCategories::ADH_CATEGORY_CONTACT
+    ),
     'url_adh' => array(
         'label'    => _T("Website:"),
         'propname' => 'website',
         'required' => false,
         'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 19,
+        'position' => 20,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
     'twitter_adh' => array(
@@ -189,15 +213,7 @@ $members_fields = array(
         'propname' => 'twitter',
         'required' => false,
         'visible'  => FieldsConfig::NOBODY,
-        'position' => 20,
-        'category' => FieldsCategories::ADH_CATEGORY_CONTACT
-    ),
-    'discord_adh' => array(
-        'label'    => _T("Discord:"),
-        'propname' => 'discord',
-        'required' => false,
-        'visible'  => FieldsConfig::NOBODY,
-        'position' => 22,
+        'position' => 21,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
     'telegram_adh' => array(
@@ -205,32 +221,64 @@ $members_fields = array(
         'propname' => 'telegram',
         'required' => false,
         'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 21,
+        'position' => 22,
         'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     ),
-    'info_adh' => array(
-        'label'    => _T("Other informations (admin):"),
-        'propname' => 'others_infos_admin',
+    'discord_adh' => array(
+        'label'    => _T("Discord:"),
+        'propname' => 'discord',
+        'required' => false,
+        'visible'  => FieldsConfig::NOBODY,
+        'position' => 23,
+        'category' => FieldsCategories::ADH_CATEGORY_CONTACT
+    ),
+    'bool_display_info' => array(
+        'label'    => _T("Be visible in the members list:"),
+        'propname' => 'appears_in_list',
+        'required' => false,
+        'visible'  => FieldsConfig::USER_WRITE,
+        'position' => 24,
+        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
+    ),
+    'parent_id'     => array(
+        'label'    => _T("Parent:"),
+        'propname' => 'parent',
+        'required' => false,
+        'visible'  => FieldsConfig::NOBODY,
+        'position' => 25,
+        'category' => FieldsCategories::ADH_CATEGORY_CONTACT
+    )
+    'activite_adh' => array(
+        'label'    => _T("Account:"),
+        'propname' => 'active',
         'required' => false,
         'visible'  => FieldsConfig::STAFF,
-        'position' => 33,
+        'position' => 26,
         'category' => FieldsCategories::ADH_CATEGORY_GALETTE
     ),
-    'info_public_adh' => array(
-        'label'    => _T("Other informations:"),
-        'propname' => 'others_infos',
+    'id_statut' => array(
+        'label'    => _T("Status:"),
+        'propname' => 'status',
         'required' => false,
-        'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 34,
+        'visible'  => FieldsConfig::STAFF,
+        'position' => 27,
         'category' => FieldsCategories::ADH_CATEGORY_GALETTE
     ),
-    'prof_adh' => array(
-        'label'    => _T("Profession:"),
-        'propname' => 'job',
+    'bool_admin_adh' => array(
+        'label'    => _T("Galette Admin:"),
+        'propname' => 'admin',
         'required' => false,
-        'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 9,
-        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
+        'visible'  => FieldsConfig::ADMIN,
+        'position' => 28,
+        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
+    ),
+    'bool_exempt_adh' => array(
+        'label'    => _T("Freed of dues:"),
+        'propname' => 'due_free',
+        'required' => false,
+        'visible'  => FieldsConfig::STAFF,
+        'position' => 29,
+        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
     ),
     'login_adh' => array(
         'label'    => _T("Username:"),
@@ -256,44 +304,28 @@ $members_fields = array(
         'position' => 32,
         'category' => FieldsCategories::ADH_CATEGORY_GALETTE
     ),
+    'info_adh' => array(
+        'label'    => _T("Other informations (admin):"),
+        'propname' => 'others_infos_admin',
+        'required' => false,
+        'visible'  => FieldsConfig::STAFF,
+        'position' => 33,
+        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
+    ),
+    'info_public_adh' => array(
+        'label'    => _T("Other informations:"),
+        'propname' => 'others_infos',
+        'required' => false,
+        'visible'  => FieldsConfig::USER_WRITE,
+        'position' => 34,
+        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
+    ),
     'date_modif_adh' => array(
         'label'    => _T("Modification date:"),
         'propname' => 'modification_date',
         'required' => false,
         'visible'  => FieldsConfig::USER_WRITE,
         'position' => 35,
-        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
-    ),
-    'activite_adh' => array(
-        'label'    => _T("Account:"),
-        'propname' => 'active',
-        'required' => false,
-        'visible'  => FieldsConfig::STAFF,
-        'position' => 26,
-        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
-    ),
-    'bool_admin_adh' => array(
-        'label'    => _T("Galette Admin:"),
-        'propname' => 'admin',
-        'required' => false,
-        'visible'  => FieldsConfig::ADMIN,
-        'position' => 28,
-        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
-    ),
-    'bool_exempt_adh' => array(
-        'label'    => _T("Freed of dues:"),
-        'propname' => 'due_free',
-        'required' => false,
-        'visible'  => FieldsConfig::STAFF,
-        'position' => 29,
-        'category' => FieldsCategories::ADH_CATEGORY_GALETTE
-    ),
-    'bool_display_info' => array(
-        'label'    => _T("Be visible in the members list:"),
-        'propname' => 'appears_in_list',
-        'required' => false,
-        'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 25,
         'category' => FieldsCategories::ADH_CATEGORY_GALETTE
     ),
     'date_echeance' => array(
@@ -303,37 +335,5 @@ $members_fields = array(
         'visible'  => FieldsConfig::STAFF,
         'position' => 36,
         'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
-    ),
-    'pref_lang' => array(
-        'label'    => _T("Language:"),
-        'propname' => 'language',
-        'required' => false,
-        'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 10,
-        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
-    ),
-    'lieu_naissance' => array(
-        'label'    => _T("Birthplace:"),
-        'propname' => 'birth_place',
-        'required' => false,
-        'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 8,
-        'category' => FieldsCategories::ADH_CATEGORY_IDENTITY
-    ),
-    'gpgid' => array(
-        'label'    => _T("GPG (Encryption key):"),
-        'propname' => 'gnupgid',
-        'required' => false,
-        'visible'  => FieldsConfig::USER_WRITE,
-        'position' => 23,
-        'category' => FieldsCategories::ADH_CATEGORY_CONTACT
-    ),
-    'parent_id'     => array(
-        'label'    => _T("Parent:"),
-        'propname' => 'parent',
-        'required' => false,
-        'visible'  => FieldsConfig::NOBODY,
-        'position' => 25,
-        'category' => FieldsCategories::ADH_CATEGORY_CONTACT
     )
 );
