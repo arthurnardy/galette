@@ -74,6 +74,9 @@ $reminders = new Reminders();
 
 
 $list_reminders = $reminders->getList($container->get('zdb'), false);
+$success_detected = array();
+$error_detected = array();
+
 if (count($list_reminders) > 0) {
     foreach ($list_reminders as $reminder) {
         //send reminders by mail
