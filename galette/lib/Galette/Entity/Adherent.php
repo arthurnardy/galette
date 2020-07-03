@@ -102,9 +102,9 @@ class Adherent
     private $_gsm;
     private $_email;
     private $_website;
-    private $_discord; /** TODO: remove */
-    private $_twitter; /** TODO: remove */
-    private $_telegram; /** TODO: remove */
+    private $_discord; 
+    private $_twitter; 
+    private $_telegram;
     private $_gnupgid; 
     //Galette relative informations
     private $_appears_in_list;
